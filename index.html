@@ -1150,6 +1150,95 @@
         transform: none;
       }
     }
+
+    /* ===== Credigo Assistant ===== */
+    .credigo-chat {
+      --chat-ink: #10223d;
+      --chat-blue: #0b2f63;
+      --chat-orange: #f1801e;
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      z-index: 1500;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .credigo-chat-launcher {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 0;
+      border-radius: 999px;
+      padding: 12px 18px 12px 12px;
+      color: #fff;
+      background: linear-gradient(135deg, #1450a3, #0b2f63);
+      box-shadow: 0 16px 35px -14px rgba(11, 47, 99, .7), 0 0 0 1px rgba(255,255,255,.16) inset;
+      cursor: pointer;
+      font: 600 .9rem 'Space Grotesk', sans-serif;
+      transition: transform .25s var(--ease), box-shadow .25s var(--ease);
+    }
+
+    .credigo-chat-launcher:hover { transform: translateY(-3px); box-shadow: 0 20px 42px -14px rgba(11, 47, 99, .8), 0 0 0 1px rgba(255,255,255,.2) inset; }
+    .credigo-chat-launcher:focus-visible { outline-color: var(--orange); }
+    .credigo-chat-launcher-icon, .credigo-chat-avatar { display: grid; place-items: center; border-radius: 12px; background: rgba(255,255,255,.13); }
+    .credigo-chat-launcher-icon { width: 32px; height: 32px; }
+    .credigo-chat-launcher-icon svg { width: 19px; height: 19px; }
+    .credigo-chat-window {
+      display: none;
+      flex-direction: column;
+      width: min(410px, calc(100vw - 32px));
+      height: min(650px, calc(100vh - 48px));
+      overflow: hidden;
+      border: 1px solid rgba(20,80,163,.18);
+      border-radius: 22px;
+      background: #fff;
+      box-shadow: 0 30px 80px -28px rgba(3, 20, 48, .55), 0 0 0 1px rgba(255,255,255,.8) inset;
+      animation: credigoChatIn .28s var(--ease);
+    }
+    .credigo-chat.is-open .credigo-chat-window { display: flex; }
+    .credigo-chat.is-open .credigo-chat-launcher { display: none; }
+    @keyframes credigoChatIn { from { opacity: 0; transform: translateY(12px) scale(.98); } to { opacity: 1; transform: none; } }
+    .credigo-chat-header { display: flex; align-items: center; gap: 11px; padding: 17px 17px 15px; color: #fff; background: linear-gradient(135deg, #1450a3, #0b2f63 68%, #06162d); }
+    .credigo-chat-avatar { width: 38px; height: 38px; flex: 0 0 auto; border: 1px solid rgba(255,255,255,.28); }
+    .credigo-chat-avatar svg { width: 22px; }
+    .credigo-chat-title { min-width: 0; flex: 1; }
+    .credigo-chat-title strong { display: block; color: #fff; font: 600 .98rem 'Space Grotesk', sans-serif; }
+    .credigo-chat-title span { display: block; margin-top: 2px; color: #c7d9f2; font-size: .71rem; }
+    .credigo-chat-tools { display: flex; gap: 4px; }
+    .credigo-chat-tool { width: 30px; height: 30px; padding: 0; border: 0; border-radius: 8px; color: #fff; background: transparent; cursor: pointer; font-size: 1rem; }
+    .credigo-chat-tool:hover { background: rgba(255,255,255,.13); }
+    .credigo-chat-messages { flex: 1; overflow-y: auto; padding: 18px 14px 12px; background: linear-gradient(180deg, #f5f8fc 0%, #fff 34%); }
+    .credigo-chat-row { display: flex; gap: 8px; margin: 0 0 14px; align-items: flex-end; }
+    .credigo-chat-row.user { justify-content: flex-end; }
+    .credigo-chat-bubble { max-width: 87%; padding: 11px 13px; border-radius: 14px 14px 14px 4px; color: var(--chat-ink); background: #fff; border: 1px solid #e1e9f3; box-shadow: 0 5px 14px -11px rgba(11,47,99,.4); font-size: .84rem; line-height: 1.52; }
+    .credigo-chat-row.user .credigo-chat-bubble { border-radius: 14px 14px 4px 14px; color: #fff; background: var(--chat-blue); border-color: var(--chat-blue); }
+    .credigo-chat-bubble p { margin: 0 0 8px; color: inherit; font-size: inherit; }
+    .credigo-chat-bubble p:last-child { margin-bottom: 0; }
+    .credigo-chat-bubble ul, .credigo-chat-bubble ol { margin: 7px 0 2px 18px; padding: 0; }
+    .credigo-chat-bubble li { margin: 4px 0; }
+    .credigo-chat-bubble a { color: var(--chat-blue); text-decoration: underline; font-weight: 600; }
+    .credigo-chat-row.user .credigo-chat-bubble a { color: #fff; }
+    .credigo-chat-time { display: block; margin-top: 6px; color: #8290a3; font-size: .64rem; }
+    .credigo-chat-row.user .credigo-chat-time { color: #c7d9f2; }
+    .credigo-chat-suggestions { display: flex; flex-wrap: wrap; gap: 7px; padding: 0 14px 10px; background: #fff; }
+    .credigo-chat-chip { border: 1px solid #cbd9ea; border-radius: 999px; padding: 7px 10px; color: var(--chat-blue); background: #fff; cursor: pointer; font: 500 .72rem 'Inter', sans-serif; transition: border-color .2s, background .2s, transform .2s; }
+    .credigo-chat-chip:hover { border-color: var(--chat-orange); background: #fff7ef; transform: translateY(-1px); }
+    .credigo-chat-composer { display: flex; gap: 8px; padding: 12px; border-top: 1px solid #e5ebf3; background: #fff; }
+    .credigo-chat-input { flex: 1; min-width: 0; resize: none; height: 42px; padding: 11px 12px; border: 1px solid #d5dfeb; border-radius: 11px; color: var(--chat-ink); background: #f8fafc; font: .82rem 'Inter', sans-serif; }
+    .credigo-chat-input:focus { outline: 2px solid rgba(241,128,30,.45); outline-offset: 1px; border-color: var(--chat-orange); }
+    .credigo-chat-send { width: 42px; height: 42px; flex: 0 0 auto; border: 0; border-radius: 11px; color: #fff; background: var(--chat-orange); cursor: pointer; }
+    .credigo-chat-send:hover { background: #d96e0f; }
+    .credigo-chat-send svg { width: 18px; }
+    .credigo-chat-typing { display: inline-flex; gap: 4px; padding: 12px 14px; border: 1px solid #e1e9f3; border-radius: 14px 14px 14px 4px; background: #fff; }
+    .credigo-chat-typing i { width: 5px; height: 5px; border-radius: 50%; background: #7b8da6; animation: credigoDot 1s infinite ease-in-out; }
+    .credigo-chat-typing i:nth-child(2) { animation-delay: .15s; }.credigo-chat-typing i:nth-child(3) { animation-delay: .3s; }
+    @keyframes credigoDot { 0%, 60%, 100% { transform: translateY(0); opacity: .45; } 30% { transform: translateY(-3px); opacity: 1; } }
+    @media (max-width: 640px) {
+      .credigo-chat { right: 12px; bottom: 12px; left: 12px; }
+      .credigo-chat-launcher { float: right; }
+      .credigo-chat-window { width: 100%; height: min(720px, calc(100vh - 24px)); border-radius: 18px; }
+    }
+    @media (prefers-reduced-motion: reduce) { .credigo-chat-window, .credigo-chat-typing i { animation: none; } }
   </style>
 </head>
 
@@ -2241,6 +2330,26 @@
     </div>
   </main>
 
+  <aside class="credigo-chat" aria-label="Credigo Assistant">
+    <button class="credigo-chat-launcher" type="button" aria-expanded="false" aria-controls="credigo-chat-window">
+      <span class="credigo-chat-launcher-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 6.5A3.5 3.5 0 0 1 8.5 3h7A3.5 3.5 0 0 1 19 6.5v5a3.5 3.5 0 0 1-3.5 3.5H12l-4.5 4v-4.2A3.5 3.5 0 0 1 5 11.5v-5Z"/><path d="M9 9h.01M12 9h.01M15 9h.01" stroke-linecap="round"/></svg></span>
+      <span>Credigo Assistant</span>
+    </button>
+    <section class="credigo-chat-window" id="credigo-chat-window" role="dialog" aria-modal="false" aria-labelledby="credigo-chat-title" aria-hidden="true">
+      <header class="credigo-chat-header">
+        <span class="credigo-chat-avatar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 6.5A3.5 3.5 0 0 1 8.5 3h7A3.5 3.5 0 0 1 19 6.5v5a3.5 3.5 0 0 1-3.5 3.5H12l-4.5 4v-4.2A3.5 3.5 0 0 1 5 11.5v-5Z"/><path d="M9 9h.01M12 9h.01M15 9h.01" stroke-linecap="round"/></svg></span>
+        <div class="credigo-chat-title"><strong id="credigo-chat-title">CREDIGO ASSISTANT</strong><span>Your guide to smarter cooperative credit</span></div>
+        <div class="credigo-chat-tools"><button class="credigo-chat-tool" type="button" data-chat-clear aria-label="Clear conversation" title="Clear conversation">↺</button><button class="credigo-chat-tool" type="button" data-chat-close aria-label="Close Credigo Assistant" title="Close">×</button></div>
+      </header>
+      <div class="credigo-chat-messages" data-chat-messages aria-live="polite"></div>
+      <div class="credigo-chat-suggestions" data-chat-suggestions></div>
+      <form class="credigo-chat-composer" data-chat-form>
+        <textarea class="credigo-chat-input" data-chat-input rows="1" aria-label="Ask Credigo Assistant" placeholder="Ask about Credigo..."></textarea>
+        <button class="credigo-chat-send" type="submit" aria-label="Send message"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m4 4 16 8-16 8 3-8-3-8Z"/><path d="M7 12h13"/></svg></button>
+      </form>
+    </section>
+  </aside>
+
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
@@ -2452,6 +2561,151 @@
 
     });
 
+  </script>
+  <script>
+    /* Credigo Assistant: a deliberately local, source-grounded conversation layer. */
+    (() => {
+      const STORAGE_KEY = "credigo_chat_history";
+      const OPEN_KEY = "credigo_chat_open";
+      const typoMap = { credgo: "credigo", creddigo: "credigo", creditgo: "credigo", credif: "credifi", blockchian: "blockchain", blockchainn: "blockchain", borower: "borrower", cooperativ: "cooperative", conttract: "contract", scor: "score", kaise: "how", kya: "what", kyun: "why", h: "hai" };
+      const stopWords = new Set(["a", "an", "and", "are", "can", "do", "does", "for", "how", "i", "is", "it", "my", "of", "the", "to", "what", "will", "with"]);
+      const intents = [
+        { id: "greeting", phrases: ["hi", "hello", "hey", "good morning", "good evening"], terms: ["namaste"] },
+        { id: "thanks", phrases: ["thank you", "thanks", "thats helpful", "that is helpful", "bye", "goodbye"], terms: [] },
+        { id: "credifi", phrases: ["what is credifi", "credifi kya hai", "credifi platform"], terms: ["credifi"] },
+        { id: "loanApproval", phrases: ["approve my loan", "will i get a loan", "loan guarantee", "loan directly", "mera loan", "loan approve"], terms: ["approval", "eligible", "eligibility", "guarantee", "lender"] },
+        { id: "loan", phrases: ["does credigo give loans", "credigo loan deta", "issue loans", "give loans"], terms: ["loan", "lending", "borrow"] },
+        { id: "pricing", phrases: ["how much does credigo cost", "what is the pricing", "cost for a bank", "annual license"], terms: ["price", "pricing", "cost", "lakh", "saas"] },
+        { id: "funding", phrases: ["how much funding", "seed funding", "funding ask", "investment opportunity"], terms: ["funding", "invest", "investor", "crore", "seed"] },
+        { id: "pilot", phrases: ["what is the pilot", "pilot program", "request a pilot", "pilot kaise request", "want a pilot"], terms: ["pilot", "cohort"] },
+        { id: "partnership", phrases: ["become a partner", "who can partner", "partnership", "partner with credigo"], terms: ["partner", "partnership", "rrb", "mfi", "agritech"] },
+        { id: "bank", phrases: ["how does credigo help banks", "bank ke liye kya fayda", "for banks", "bank benefit"], terms: ["bank", "loan officer", "inter bank", "institution"] },
+        { id: "borrower", phrases: ["how does credigo help borrowers", "borrower ke liye kya fayda", "register as a borrower", "register interest"], terms: ["borrower", "customer", "applicant", "register"] },
+        { id: "alternativeData", phrases: ["what data does credigo use", "upi transactions", "alternative data", "upi se score"], terms: ["upi", "agricultural", "utility", "mobile activity", "data"] },
+        { id: "score", phrases: ["how is my credit score calculated", "credit score kaise banta", "dynamic credit score", "improve my score", "whats my score"], terms: ["score", "rating", "assessment", "profile", "improve"] },
+        { id: "portable", phrases: ["what is portable credit history", "portable reputation", "move to another bank", "transferable credit"], terms: ["portable", "transferable", "reputation"] },
+        { id: "zkp", phrases: ["what are zero knowledge proofs", "zero knowledge proof kya", "private verification"], terms: ["zero knowledge", "zkp", "cryptographic", "privacy"] },
+        { id: "smartContract", phrases: ["what are smart contracts", "smart contract"], terms: ["smart contract", "programmable rules"] },
+        { id: "consensus", phrases: ["what is smart consensus", "smart consensus"], terms: ["consensus", "network agree"] },
+        { id: "ledger", phrases: ["what is a distributed ledger", "distributed ledger"], terms: ["ledger", "shared record", "decentralised infrastructure"] },
+        { id: "blockchain", phrases: ["what is blockchain", "why does credigo use blockchain", "blockchain kyun use", "how does blockchain help"], terms: ["blockchain", "tamper", "audit"] },
+        { id: "defi", phrases: ["what is defi", "is credigo a cryptocurrency", "can i buy credigo tokens", "crypto"], terms: ["defi", "cryptocurrency", "crypto", "token", "coin"] },
+        { id: "fraud", phrases: ["how does credigo prevent fraud", "fraud prevention"], terms: ["fraud", "fake", "tamper"] },
+        { id: "compliance", phrases: ["does credigo support compliance", "rbi nabard compliance", "rbi", "nabard"], terms: ["compliance", "regulatory", "reporting", "rbi", "nabard"] },
+        { id: "inclusion", phrases: ["who can use credigo", "financial inclusion", "women borrowers", "shg", "msme", "rural", "tribal"], terms: ["women", "self help", "msme", "rural", "tribal", "inclusion"] },
+        { id: "howItWorks", phrases: ["how does credigo work", "how it works", "credigo kaise kaam"], terms: ["process", "steps", "works"] },
+        { id: "contact", phrases: ["how can i contact credigo", "get in touch", "contact information", "phone number", "email"], terms: ["contact", "email", "phone"] },
+        { id: "credigo", phrases: ["what is credigo", "credigo kya hai", "tell me about credigo", "credigo kya karta"], terms: ["credigo", "platform", "company"] }
+      ];
+
+      const responses = {
+        greeting: ["Hi! I’m the Credigo Assistant. I can explain Credigo, cooperative banking, credit scoring, technology, pilots and partnerships. What would you like to explore?"],
+        thanks: ["You’re welcome. I’m here whenever you want to explore Credigo’s platform, technology, bank use cases or borrower experience."],
+        credigo: ["Credigo is a credit-scoring and credit-infrastructure platform designed for India’s cooperative banks. It combines alternative data, programmable assessment and decentralised infrastructure to help institutions evaluate borrowers more transparently while building a portable, verifiable credit reputation.\n\nCredigo is not a bank and does not itself issue loans; lending decisions remain with the participating cooperative bank."],
+        credifi: ["CreDiFi is Credigo’s core credit-infrastructure platform. It turns relevant alternative financial data into a transparent, programmable credit assessment for cooperative banks and borrowers. Credigo is the overall platform and solution; CreDiFi is the engine behind it."],
+        howItWorks: ["Credigo’s intended flow has four stages:\n\n1. **Data** — relevant signals such as UPI transactions, agricultural records, utility payments and mobile-usage patterns.\n2. **Verification** — credit events can be validated with privacy-preserving, zero-knowledge-proof based verification.\n3. **Assessment** — programmable rules and smart contracts support consistent evaluation.\n4. **Reputation** — the result is designed to be a portable, verifiable credit reputation across participating cooperative institutions."],
+        alternativeData: ["Credigo’s platform is designed to use relevant signals such as UPI transactions, agricultural records, utility payments and mobile activity to build a more complete credit profile. Access depends on the required permissions, integrations and data-access arrangements; it does not mean Credigo automatically accesses a UPI account."],
+        score: ["Credigo describes a dynamic, real-time credit score that can update as relevant data changes. The exact formula, weights, ranges and approval thresholds are proprietary or not specified in the source material.\n\nI can’t see your personal profile or calculate an actual Credigo score here. The model is intended to reward positive, responsible credit behaviour, but I can’t predict how an individual score would change."],
+        portable: ["Portable credit history means a verified credit reputation is designed to travel across participating cooperative institutions. Imagine building a responsible borrowing history with one participating institution: at another participating institution, the model is designed to avoid making you start from zero. It is not a claim that every bank in India currently accepts Credigo reputation."],
+        borrower: ["For borrowers, Credigo is designed to provide a more transparent evaluation, a dynamic credit profile, portable credit history and recognition for responsible borrowing. It may also use relevant alternative data for people without a traditional formal credit history.\n\nCredigo does not guarantee a loan, a lower rate or eligibility. Register your interest to follow the borrower pilot."],
+        bank: ["For cooperative banks, Credigo is designed to provide dynamic scoring, alternative-data aggregation, fraud-prevention support, automated audit trails, compliance support and clearer risk visibility. It is intended to layer onto existing bank systems rather than replace core banking infrastructure, and may support broader inter-bank lending opportunities."],
+        loan: ["No. Credigo does not itself issue loans. It provides credit-assessment infrastructure for cooperative banks; lending decisions remain with the participating cooperative bank."],
+        loanApproval: ["No. Credigo cannot approve or guarantee your loan and does not make a personal lending decision. It provides assessment infrastructure and tools; the final decision remains with the participating cooperative bank."],
+        blockchain: ["Credigo uses blockchain and decentralised principles to support transparent record-keeping, tamper-resistant records, verification, auditability and shared trust. The goal is stronger credit infrastructure and portable reputation, not cryptocurrency trading."],
+        defi: ["Credigo applies selected DeFi principles such as programmable systems, transparent records, peer-to-peer architecture and tokenised reputation to cooperative credit infrastructure. It is not a decentralised exchange, crypto wallet or trading platform, and the website states there are no coins to trade."],
+        zkp: ["A zero-knowledge proof is a cryptographic technique that can help prove something is valid without revealing the underlying private information. Credigo’s architecture uses this idea to support private credit verification without claiming a specific algorithm or certification."],
+        smartContract: ["Smart contracts are programmable rules that can automate parts of credit evaluation. Credigo uses them to support consistent evaluation, transparency and reduced manual subjectivity. They do not automatically approve or reject every loan."],
+        consensus: ["Smart consensus refers to automated, secure validation of credit events across network participants. In simple terms, the network can use consensus mechanisms to agree on valid events before they are recorded."],
+        ledger: ["A distributed ledger is a shared record maintained across participating institutions. Credigo’s material describes a real-time, immutable record for tracking member activity across participating cooperative institutions."],
+        fraud: ["Credigo is designed to strengthen fraud prevention through blockchain-based verification and distributed infrastructure, making credit events more auditable. It does not claim to eliminate fraud."],
+        compliance: ["Credigo is designed to support cooperative banks’ regulatory reporting and audit workflows around relevant NABARD and RBI requirements. This is support for compliance processes, not a claim that Credigo is approved by RBI or certified by NABARD."],
+        pricing: ["According to the Credigo pitch deck, annual B2B SaaS licensing is described in the range of ₹10–25 lakh, depending on institution size and transaction volume. Additional models include premium analytics and transaction-based fees. The actual proposal would depend on the bank’s requirements."],
+        pilot: ["Credigo’s Year 1 pilot is planned around 5 district cooperative banks across 3 states. The aim is to validate the concept, test implementation and gather user feedback before broader expansion. The source describes this as a plan, not a completed pilot."],
+        partnership: ["Credigo’s partnership strategy includes Regional Rural Banks, agri-tech companies, Microfinance Institutions, cooperative federations, NABARD connections and incubation networks. These are strategic categories, not a claim that every listed organisation is currently a customer."],
+        funding: ["According to the Credigo pitch deck, the stated seed-funding ask is ₹1.5 crore for 18 months. The planned use includes technology development, regulatory compliance, pilot implementation and team expansion. This is an ask, not a claim that the funding has already been raised."],
+        inclusion: ["Credigo’s intended impact groups include women, Self-Help Groups, MSMEs, rural communities and tribal communities. These are target groups for broader financial inclusion; the material does not claim current large-scale service to each group."],
+        contact: ["You can reach the Credigo team at **globalexpressgroup@gmail.com** or **+91 96505 60277** / **+91 99101 96123**. You can also use the general enquiry form."],
+        unknown: ["I don’t have enough verified Credigo information to answer that accurately. I can help with the platform, credit scoring, cooperative banks, borrowers, technology, pilots, partnerships or contact details. What would you like to explore?"]
+      };
+      const suggestions = {
+        default: ["What is Credigo?", "How does it work?", "For Banks", "For Borrowers", "What is CreDiFi?", "Blockchain & DeFi", "Request a Pilot"],
+        bank: ["How does integration work?", "Fraud prevention", "Compliance", "Pilot program"],
+        borrower: ["How is my score created?", "What is portable credit?", "Does Credigo give loans?", "Register as a borrower"],
+        blockchain: ["Zero-knowledge proofs", "Smart contracts", "Distributed ledger", "Reputation protocols"],
+        pilot: ["Request a Pilot", "Who can partner?", "How does integration work?", "Contact Credigo"]
+      };
+
+      const normalize = value => value.toLowerCase().replace(/[’']/g, "").replace(/[^\w\s₹+.-]/g, " ").split(/\s+/).filter(Boolean).map(word => typoMap[word] || word).join(" ").trim();
+      const scoreIntent = (text, intent) => {
+        const normalized = normalize(text);
+        let score = 0;
+        intent.phrases.forEach(phrase => { if (normalized.includes(normalize(phrase))) score += 5; });
+        intent.terms.forEach(term => { if (normalized.includes(normalize(term))) score += term.includes(" ") ? 2.4 : 1.7; });
+        return score;
+      };
+
+      function detectIntent(text, previous) {
+        const normalized = normalize(text);
+        const ranked = intents.map(intent => ({ id: intent.id, score: scoreIntent(normalized, intent) })).sort((a, b) => b.score - a.score);
+        let winner = ranked[0];
+        if ((!winner || winner.score < 2) && previous && /^(and|also|what about|why does it|does it|for a|for the|that|it)\b/.test(normalized)) winner = { id: previous, score: 2.2 };
+        return { id: winner && winner.score >= 2 ? winner.id : "unknown", confidence: winner ? Math.min(winner.score / 8, 1) : 0 };
+      }
+
+      const escapeHtml = value => value.replace(/[&<>"']/g, character => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[character]));
+      const renderText = text => text.split("\n").map(line => escapeHtml(line).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")).join("<br>");
+      const actionLinks = { "Request a Pilot": "https://forms.gle/nveTZYqikFSvibGE6", "Register as a borrower": "https://forms.gle/Zmbhja2hvJTu6Wf17", "Become a Partner": "https://forms.gle/kkBwVWYq6VnVc37w6", "Investment Opportunity": "https://forms.gle/Tv9k7XxU2NmTYdYz6", "Contact Credigo": "contact.html", "General Enquiry": "https://forms.gle/hjFjtxQyz5n9TFTr5" };
+      const ctaFor = id => ({ pilot: "Request a Pilot", partnership: "Become a Partner", funding: "Investment Opportunity", contact: "General Enquiry", borrower: "Register as a borrower" }[id]);
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const root = document.querySelector(".credigo-chat");
+        if (!root) return;
+        const messages = root.querySelector("[data-chat-messages]");
+        const suggestionBox = root.querySelector("[data-chat-suggestions]");
+        const input = root.querySelector("[data-chat-input]");
+        const launcher = root.querySelector(".credigo-chat-launcher");
+        const windowEl = root.querySelector(".credigo-chat-window");
+        let history = [];
+        let lastIntent = null;
+        try { history = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"); } catch (_) { history = []; }
+
+        const save = () => { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(history.slice(-40))); } catch (_) {} };
+        const scrollDown = () => { messages.scrollTop = messages.scrollHeight; };
+        const addMessage = (sender, text, persist = true) => {
+          const row = document.createElement("div"); row.className = "credigo-chat-row " + sender;
+          const bubble = document.createElement("div"); bubble.className = "credigo-chat-bubble"; bubble.innerHTML = renderText(text);
+          const time = document.createElement("span"); time.className = "credigo-chat-time"; time.textContent = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }); bubble.appendChild(time); row.appendChild(bubble); messages.appendChild(row);
+          if (persist) { history.push({ sender, message: text, timestamp: Date.now() }); save(); }
+          scrollDown();
+        };
+        const showSuggestions = intent => {
+          suggestionBox.innerHTML = "";
+          (suggestions[intent] || suggestions.default).forEach(label => { const button = document.createElement("button"); button.type = "button"; button.className = "credigo-chat-chip"; button.textContent = label; button.addEventListener("click", () => send(label)); suggestionBox.appendChild(button); });
+        };
+        const addCta = label => {
+          if (!label || !actionLinks[label]) return;
+          const button = document.createElement("a"); button.className = "credigo-chat-chip"; button.textContent = label; button.href = actionLinks[label]; button.target = actionLinks[label].startsWith("http") ? "_blank" : "_self"; button.rel = "noopener"; suggestionBox.prepend(button);
+        };
+        const setOpen = open => { root.classList.toggle("is-open", open); launcher.setAttribute("aria-expanded", String(open)); windowEl.setAttribute("aria-hidden", String(!open)); try { localStorage.setItem(OPEN_KEY, String(open)); } catch (_) {} if (open) setTimeout(() => input.focus(), 30); };
+        const showTyping = () => { const row = document.createElement("div"); row.className = "credigo-chat-row assistant"; row.dataset.typing = "true"; row.innerHTML = '<div class="credigo-chat-typing" aria-label="Credigo Assistant is typing"><i></i><i></i><i></i></div>'; messages.appendChild(row); scrollDown(); return row; };
+        function send(raw) {
+          const text = raw.trim(); if (!text) return;
+          input.value = ""; addMessage("user", text);
+          const detected = detectIntent(text, lastIntent); lastIntent = detected.id;
+          const typing = showTyping();
+          setTimeout(() => { typing.remove(); addMessage("assistant", (responses[detected.id] || responses.unknown)[Math.floor(Math.random() * (responses[detected.id] || responses.unknown).length)]); showSuggestions(detected.id); addCta(ctaFor(detected.id)); }, 380);
+        }
+        const welcome = () => { if (!history.length) { addMessage("assistant", "Hi! I’m the Credigo Assistant. 👋\n\nI can help you understand Credigo, credit scoring, cooperative banking, alternative data, blockchain, borrower reputation, pilot programs, partnerships and more.\n\nWhat would you like to explore?"); } else { history.forEach(item => addMessage(item.sender, item.message, false)); } showSuggestions("default"); };
+        launcher.addEventListener("click", () => setOpen(true));
+        root.querySelector("[data-chat-close]").addEventListener("click", () => setOpen(false));
+        root.querySelector("[data-chat-clear]").addEventListener("click", () => { if (window.confirm("Clear this conversation?")) { history = []; messages.innerHTML = ""; save(); welcome(); } });
+        root.querySelector("[data-chat-form]").addEventListener("submit", event => { event.preventDefault(); send(input.value); });
+        input.addEventListener("keydown", event => { if (event.key === "Enter" && !event.shiftKey) { event.preventDefault(); send(input.value); } });
+        document.addEventListener("keydown", event => { if (event.key === "Escape" && root.classList.contains("is-open")) setOpen(false); });
+        welcome();
+        try { if (localStorage.getItem(OPEN_KEY) === "true") setOpen(true); } catch (_) {}
+      });
+    })();
   </script>
 </body>
 
