@@ -350,7 +350,8 @@
       gap: 30px;
     }
 
-    .nav-links a {
+    .nav-links > a,
+    .nav-item > a {
       font-size: .92rem;
       font-weight: 500;
       color: rgba(255, 255, 255, .82);
@@ -360,10 +361,317 @@
       letter-spacing: -.005em;
     }
 
-    .nav-links a:hover,
-    .nav-links a.active {
+    .nav-links > a:hover,
+    .nav-links > a.active,
+    .nav-item > a:hover,
+    .nav-item > a.active {
       color: #FFFFFF;
       border-bottom-color: var(--orange);
+    }
+
+    .nav-item {
+      position: relative;
+    }
+
+    .nav-dropdown {
+      position: absolute;
+      top: calc(100% + 12px);
+      left: -20px;
+      z-index: 1100;
+      width: 300px;
+      padding: 18px;
+      border: 1px solid rgba(227, 233, 242, .9);
+      border-radius: 12px;
+      background: #fff;
+      box-shadow: var(--shadow);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(7px);
+      transition: opacity .18s var(--ease), transform .18s var(--ease), visibility .18s;
+    }
+
+    .nav-dropdown.wide {
+      width: 440px;
+    }
+
+    .nav-item.menu-open .nav-dropdown,
+    .nav-item:hover .nav-dropdown,
+    .nav-item:focus-within .nav-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .nav-dropdown-label {
+      margin: 0 0 12px;
+      color: var(--orange);
+      font: 600 .68rem 'IBM Plex Mono', monospace;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .nav-dropdown-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 4px 12px;
+    }
+
+    .nav-dropdown a,
+    .nav-dropdown button {
+      display: block;
+      width: 100%;
+      padding: 9px 8px;
+      border: 0;
+      border-radius: 7px;
+      color: var(--ink);
+      background: transparent;
+      text-align: left;
+      font: 500 .82rem 'Inter', sans-serif;
+      cursor: pointer;
+      transition: color .16s var(--ease), background .16s var(--ease);
+    }
+
+    .nav-dropdown a:hover,
+    .nav-dropdown button:hover,
+    .nav-dropdown a:focus-visible,
+    .nav-dropdown button:focus-visible {
+      color: var(--blue-dark);
+      background: var(--sky);
+    }
+
+    .nav-dropdown .nav-dropdown-grid.single {
+      grid-template-columns: 1fr;
+    }
+
+    .feature-dialog {
+      width: min(1000px, calc(100vw - 32px));
+      max-width: none;
+      max-height: min(90vh, 900px);
+      padding: 0;
+      overflow: auto;
+      border: 0;
+      border-radius: var(--radius-m);
+      color: var(--ink);
+      box-shadow: var(--shadow);
+    }
+
+    .feature-dialog::backdrop {
+      background: rgba(11, 20, 35, .62);
+      backdrop-filter: blur(3px);
+    }
+
+    .feature-dialog-inner {
+      position: relative;
+      padding: 34px;
+    }
+
+    .feature-dialog .modal-close {
+      position: sticky;
+      float: right;
+      top: 12px;
+      margin: -18px -18px 0 12px;
+    }
+
+    .feature-content {
+      clear: both;
+    }
+
+    .feature-content h2 {
+      margin-bottom: 8px;
+    }
+
+    .feature-note {
+      display: inline-block;
+      margin: 8px 0 22px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      color: var(--blue-dark);
+      background: var(--sky);
+      font-size: .75rem;
+      font-weight: 600;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .feature-card {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-s);
+      background: #fff;
+    }
+
+    .feature-card strong {
+      display: block;
+      color: var(--blue-dark);
+      font: 600 1.45rem 'Space Grotesk', sans-serif;
+    }
+
+    .feature-card span {
+      color: var(--ink-soft);
+      font-size: .78rem;
+    }
+
+    .feature-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(230px, .8fr);
+      gap: 20px;
+      align-items: start;
+    }
+
+    .feature-table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-s);
+    }
+
+    .feature-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .8rem;
+      white-space: nowrap;
+    }
+
+    .feature-table th,
+    .feature-table td {
+      padding: 11px 12px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+    }
+
+    .feature-table th {
+      color: var(--ink-soft);
+      background: var(--sky);
+      font-size: .7rem;
+      font-weight: 600;
+    }
+
+    .feature-table tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .feature-table button {
+      padding: 0;
+      border: 0;
+      color: var(--blue);
+      background: transparent;
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .feature-chart-row {
+      display: grid;
+      grid-template-columns: 78px 1fr 34px;
+      gap: 10px;
+      align-items: center;
+      margin: 14px 0;
+      font-size: .78rem;
+    }
+
+    .feature-bar {
+      height: 9px;
+      overflow: hidden;
+      border-radius: 9px;
+      background: var(--sky);
+    }
+
+    .feature-bar i {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+      background: var(--blue);
+      animation: featureBarIn .55s var(--ease) both;
+    }
+
+    .feature-chart-row:nth-child(3) .feature-bar i {
+      background: var(--orange);
+    }
+
+    .feature-chart-row:nth-child(4) .feature-bar i {
+      background: #8297b2;
+    }
+
+    @keyframes featureBarIn {
+      from { width: 0; }
+    }
+
+    .feature-controls {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+
+    .feature-field label {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 7px;
+      color: var(--ink-soft);
+      font-size: .8rem;
+      font-weight: 600;
+    }
+
+    .feature-field input[type="range"] {
+      width: 100%;
+      accent-color: var(--orange);
+    }
+
+    .feature-field input[type="number"] {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--ink);
+      font: 500 .9rem 'Inter', sans-serif;
+    }
+
+    .feature-score {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      margin: 18px 0 24px;
+    }
+
+    .feature-score-number {
+      display: grid;
+      width: 112px;
+      aspect-ratio: 1;
+      place-items: center;
+      border: 9px solid var(--sky);
+      border-top-color: var(--orange);
+      border-right-color: var(--blue);
+      border-radius: 50%;
+      color: var(--blue-dark);
+      font: 600 1.7rem 'Space Grotesk', sans-serif;
+      transition: transform .2s var(--ease);
+    }
+
+    .feature-breakdown {
+      display: none;
+      margin-top: 16px;
+    }
+
+    .feature-breakdown.open {
+      display: block;
+    }
+
+    .feature-action {
+      padding: 9px 14px;
+      border: 1px solid rgba(11, 47, 99, .25);
+      border-radius: 999px;
+      color: var(--blue-dark);
+      background: #fff;
+      font: 600 .8rem 'Inter', sans-serif;
+      cursor: pointer;
+    }
+
+    .feature-action:hover {
+      background: var(--sky);
     }
 
     .nav-cta {
@@ -1060,6 +1368,31 @@
         gap: 16px;
       }
 
+      .nav-inner.menu-open .nav-item {
+        width: 100%;
+      }
+
+      .nav-inner.menu-open .nav-item > a {
+        display: block;
+        width: fit-content;
+      }
+
+      .nav-inner.menu-open .nav-dropdown {
+        position: static;
+        display: none;
+        width: 100%;
+        margin-top: 8px;
+        padding: 12px;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+      }
+
+      .nav-inner.menu-open .nav-item.menu-open .nav-dropdown {
+        display: block;
+      }
+
       .hero-inner,
       .split,
       .split.rev {
@@ -1071,6 +1404,14 @@
         display: flex;
         flex-direction: column-reverse;
       }
+    }
+
+    @media (max-width:640px) {
+      .feature-dialog-inner { padding: 24px 18px; }
+      .feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .feature-layout { grid-template-columns: 1fr; }
+      .feature-controls { grid-template-columns: 1fr; }
+      .nav-dropdown-grid { grid-template-columns: 1fr; }
     }
 
     @media (max-width:640px) {
@@ -1251,11 +1592,70 @@
       </a>
       <nav class="nav-links">
         <a href="index.html">Home</a>
-        <a href="platform.html">Platform</a>
+        <div class="nav-item" data-nav-menu>
+          <a href="platform.html" aria-haspopup="true" aria-expanded="false" aria-controls="platform-menu">Platform</a>
+          <div class="nav-dropdown wide" id="platform-menu" role="menu" aria-label="Platform">
+            <p class="nav-dropdown-label">Core Platform</p>
+            <div class="nav-dropdown-grid">
+              <a href="platform.html" role="menuitem">Platform Overview</a>
+              <a href="platform.html" role="menuitem">Alternative Data</a>
+              <a href="platform.html" role="menuitem">Credit Engine</a>
+              <a href="platform.html" role="menuitem">Reputation Layer</a>
+            </div>
+            <p class="nav-dropdown-label" style="margin-top:14px;">Financial Tools</p>
+            <div class="nav-dropdown-grid">
+              <button type="button" role="menuitem" data-feature="credit-health">Credit Health</button>
+              <button type="button" role="menuitem" data-feature="score-simulator">Credit Score Simulator</button>
+              <button type="button" role="menuitem" data-feature="reputation-passport">Credit Reputation Passport</button>
+              <button type="button" role="menuitem" data-feature="emi-calculator">EMI Calculator</button>
+            </div>
+          </div>
+        </div>
         <a href="how-it-works.html">How It Works</a>
-        <a href="technology.html">Technology</a>
-        <a href="banks.html">For Banks</a>
-        <a href="borrowers.html">For Borrowers</a>
+        <div class="nav-item" data-nav-menu>
+          <a href="technology.html" aria-haspopup="true" aria-expanded="false" aria-controls="technology-menu">Technology</a>
+          <div class="nav-dropdown" id="technology-menu" role="menu" aria-label="Technology">
+            <p class="nav-dropdown-label">Technology</p>
+            <div class="nav-dropdown-grid single">
+              <a href="technology.html" role="menuitem">Architecture</a>
+              <a href="platform.html" role="menuitem">Alternative Data</a>
+              <a href="technology.html" role="menuitem">Zero-Knowledge Verification</a>
+              <a href="technology.html" role="menuitem">Distributed Ledger</a>
+              <a href="technology.html" role="menuitem">Smart Contracts</a>
+              <a href="technology.html" role="menuitem">Security &amp; Privacy</a>
+            </div>
+          </div>
+        </div>
+        <div class="nav-item" data-nav-menu>
+          <a href="banks.html" aria-haspopup="true" aria-expanded="false" aria-controls="banks-menu">For Banks</a>
+          <div class="nav-dropdown" id="banks-menu" role="menu" aria-label="For Banks">
+            <p class="nav-dropdown-label">For Banks</p>
+            <div class="nav-dropdown-grid single">
+              <a href="banks.html" role="menuitem">Overview</a>
+              <button type="button" role="menuitem" data-feature="bank-dashboard" data-view="dashboard">Bank Dashboard</button>
+              <button type="button" role="menuitem" data-feature="bank-dashboard" data-view="portfolio">Borrower Portfolio</button>
+              <button type="button" role="menuitem" data-feature="bank-dashboard" data-view="risk">Risk Analytics</button>
+              <button type="button" role="menuitem" data-feature="bank-dashboard" data-view="review">Application Review</button>
+              <button type="button" role="menuitem" data-feature="bank-dashboard" data-view="audit">Audit Trail</button>
+              <button type="button" role="menuitem" data-feature="bank-dashboard" data-view="compliance">Compliance View</button>
+            </div>
+          </div>
+        </div>
+        <div class="nav-item" data-nav-menu>
+          <a href="borrowers.html" aria-haspopup="true" aria-expanded="false" aria-controls="borrowers-menu">For Borrowers</a>
+          <div class="nav-dropdown" id="borrowers-menu" role="menu" aria-label="For Borrowers">
+            <p class="nav-dropdown-label">For Borrowers</p>
+            <div class="nav-dropdown-grid single">
+              <a href="borrowers.html" role="menuitem">Overview</a>
+              <button type="button" role="menuitem" data-feature="credit-health">My Credit Health</button>
+              <button type="button" role="menuitem" data-feature="score-simulator">Credit Score Simulator</button>
+              <button type="button" role="menuitem" data-feature="reputation-passport">Credit Reputation Passport</button>
+              <button type="button" role="menuitem" data-feature="emi-calculator">EMI Calculator</button>
+              <button type="button" role="menuitem" data-feature="loan-readiness">Loan Readiness</button>
+              <button type="button" role="menuitem" data-feature="financial-health">Financial Health</button>
+            </div>
+          </div>
+        </div>
         <a href="impact.html">Impact</a>
         <a href="about.html">About</a>
       </nav>
@@ -1266,6 +1666,13 @@
       <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
   </header>
+
+  <dialog class="feature-dialog" id="feature-dialog" aria-labelledby="feature-title">
+    <div class="feature-dialog-inner">
+      <button type="button" class="modal-close" data-feature-close aria-label="Close dialog">&times;</button>
+      <div class="feature-content" id="feature-content"></div>
+    </div>
+  </dialog>
 
   <main>
     <div class="page active" id="page-home">
@@ -2451,6 +2858,12 @@
       if (updateHistory !== false) history.pushState(null, "", "#" + slug);
       const navInner = document.querySelector(".nav-inner");
       if (navInner) navInner.classList.remove("menu-open");
+      document.querySelectorAll("[data-nav-menu]").forEach(menu => {
+        menu.classList.remove("menu-open");
+        menu.querySelector(":focus")?.blur();
+        menu.querySelector(":scope > a").setAttribute("aria-expanded", "false");
+      });
+      document.querySelector(".nav-inner")?.classList.remove("menu-open");
     }
 
     function updateActiveNav(slug) {
@@ -2459,6 +2872,147 @@
         const mapped = PAGE_MAP[href];
         a.classList.toggle("active", mapped === slug);
       });
+    }
+
+    const DEMO_BORROWERS = [
+      { name: "Aarav Mehta", id: "CG-2048", score: 781, risk: "Low", verification: "Complete", status: "Ready" },
+      { name: "Sana Iyer", id: "CG-1932", score: 742, risk: "Low", verification: "Complete", status: "Ready" },
+      { name: "Kabir Shah", id: "CG-2214", score: 689, risk: "Medium", verification: "In review", status: "Review" },
+      { name: "Meera Nair", id: "CG-1876", score: 716, risk: "Medium", verification: "Complete", status: "Review" },
+      { name: "Dev Patel", id: "CG-2301", score: 612, risk: "High", verification: "Pending", status: "Review" }
+    ];
+
+    const FEATURE_TITLES = {
+      dashboard: "Bank Dashboard",
+      portfolio: "Borrower Portfolio",
+      risk: "Risk Analytics",
+      review: "Application Review",
+      audit: "Audit Trail",
+      compliance: "Compliance View"
+    };
+
+    let activeBankView = "dashboard";
+
+    function featureHeading(title, label) {
+      return `<div class="eyebrow">${label}</div><h2 id="feature-title">${title}</h2><span class="feature-note">Demo / Simulated Data</span>`;
+    }
+
+    function borrowerTable() {
+      return `<div class="feature-table-wrap"><table class="feature-table"><thead><tr><th>Borrower</th><th>Credit Score</th><th>Risk Profile</th><th>Verification</th><th>Status</th><th>Action</th></tr></thead><tbody>${DEMO_BORROWERS.map((borrower, index) => `<tr><td>${borrower.name}<br><span class="subtle">${borrower.id}</span></td><td>${borrower.score}</td><td>${borrower.risk}</td><td>${borrower.verification}</td><td>${borrower.status}</td><td><button type="button" data-borrower="${index}">View</button></td></tr>`).join("")}</tbody></table></div>`;
+    }
+
+    function riskChart() {
+      return `<div class="feature-card"><h3>Risk Distribution</h3><div class="feature-chart-row"><span>Low Risk</span><div class="feature-bar"><i style="width:68%"></i></div><strong>68%</strong></div><div class="feature-chart-row"><span>Medium</span><div class="feature-bar"><i style="width:24%"></i></div><strong>24%</strong></div><div class="feature-chart-row"><span>High Risk</span><div class="feature-bar"><i style="width:8%"></i></div><strong>8%</strong></div><p class="small subtle">Illustrative distribution across fictional demo profiles.</p></div>`;
+    }
+
+    function renderBankDashboard(view = "dashboard") {
+      activeBankView = FEATURE_TITLES[view] ? view : "dashboard";
+      const content = document.getElementById("feature-content");
+      const stats = `<div class="feature-grid"><div class="feature-card"><span>Total Borrowers</span><strong>1,248</strong></div><div class="feature-card"><span>Average Credit Score</span><strong>742</strong></div><div class="feature-card"><span>Profiles Assessed</span><strong>86%</strong></div><div class="feature-card"><span>Review Required</span><strong>24</strong></div></div>`;
+      let section;
+      if (activeBankView === "audit") {
+        section = `<div class="feature-card"><h3>Recent Audit Events</h3><div class="feature-table-wrap"><table class="feature-table"><thead><tr><th>Time</th><th>Event</th><th>Reference</th><th>Outcome</th></tr></thead><tbody><tr><td>Today, 10:42</td><td>Profile assessment</td><td>CG-2048</td><td>Recorded</td></tr><tr><td>Today, 09:18</td><td>Verification check</td><td>CG-1932</td><td>Complete</td></tr><tr><td>Yesterday, 16:05</td><td>Application review</td><td>CG-2214</td><td>Flagged for review</td></tr></tbody></table></div></div>`;
+      } else if (activeBankView === "compliance") {
+        section = `<div class="feature-grid"><div class="feature-card"><span>Assessment records</span><strong>100%</strong></div><div class="feature-card"><span>Verification checks</span><strong>96%</strong></div><div class="feature-card"><span>Open exceptions</span><strong>4</strong></div></div><div class="feature-card" style="margin-top:16px"><h3>Compliance Activity</h3><p>Simulated review trail available for each demo profile. No real institution, borrower, or compliance record is represented.</p></div>`;
+      } else if (activeBankView === "risk") {
+        section = riskChart();
+      } else {
+        section = `<div class="feature-layout"><div><h3>${activeBankView === "review" ? "Applications Requiring Review" : "Borrower Portfolio"}</h3>${borrowerTable()}</div>${activeBankView === "review" ? `<div class="feature-card"><h3>Review Queue</h3><strong style="font:600 1.7rem 'Space Grotesk',sans-serif;color:var(--blue-dark)">24</strong><p class="small subtle">Fictional demo applications requiring officer review.</p><button class="feature-action" type="button" data-dashboard-view="risk">View Risk Analytics</button></div>` : riskChart()}</div>`;
+      }
+      content.innerHTML = `${featureHeading(FEATURE_TITLES[activeBankView], "For Banks")}<p class="subtle">Fictional institution overview for demonstration only.</p>${stats}<div style="margin-top:22px">${section}</div>`;
+    }
+
+    function renderBorrowerDetail(index) {
+      const borrower = DEMO_BORROWERS[index];
+      const content = document.getElementById("feature-content");
+      content.innerHTML = `${featureHeading(borrower.name, `Borrower Profile · ${borrower.id}`)}<p class="subtle">All profile details below are fictional and simulated.</p><div class="feature-grid"><div class="feature-card"><span>Credit Score</span><strong>${borrower.score}</strong></div><div class="feature-card"><span>Payment Behaviour</span><strong>92%</strong></div><div class="feature-card"><span>Debt Utilisation</span><strong>31%</strong></div><div class="feature-card"><span>Verification</span><strong>${borrower.verification}</strong></div></div><div class="feature-layout" style="margin-top:18px"><div class="feature-card"><h3>Profile Signals</h3><p>Financial stability <strong>84%</strong></p><p>Repayment consistency <strong>89%</strong></p><p>Alternative data signals <strong>Positive</strong></p><p>Credit history <strong>4.2 simulated years</strong></p></div><div class="feature-card"><h3>Simulated Timeline</h3><p>Sep 2026 · Profile assessed</p><p>Aug 2026 · Payment recorded</p><p>Jul 2026 · Verification completed</p><button class="feature-action" type="button" data-dashboard-view="${activeBankView}">Back to ${FEATURE_TITLES[activeBankView]}</button></div></div>`;
+    }
+
+    function renderFeature(name) {
+      const content = document.getElementById("feature-content");
+      if (name === "bank-dashboard") {
+        renderBankDashboard("dashboard");
+        return;
+      }
+      if (name === "credit-health") {
+        content.innerHTML = `${featureHeading("Credit Health", "Credit Health")}<p class="subtle">Simulated profile — for demonstration purposes.</p><div class="feature-score"><div class="feature-score-number">742</div><div><strong>GOOD PROFILE</strong><p class="small subtle">An illustrative profile snapshot, not a credit bureau result.</p></div></div><div class="feature-grid">${[["Payment Behaviour", "92%"], ["Financial Stability", "84%"], ["Repayment Consistency", "89%"], ["Credit History", "81%"]].map(([label, value]) => `<div class="feature-card"><span>${label}</span><strong>${value}</strong></div>`).join("")}</div><button class="feature-action" type="button" data-breakdown-toggle>View Breakdown</button><div class="feature-breakdown" id="credit-breakdown"><div class="feature-card"><h3>Simulated profile factors</h3><p>Payments and repayment consistency show the strongest illustrative signals. Values are examples only and are not used for lending decisions.</p></div></div>`;
+        return;
+      }
+      if (name === "score-simulator") {
+        content.innerHTML = `${featureHeading("Credit Score Simulator", "Financial Tools")}<p class="subtle">Demo / Simulated. This is not an actual credit score calculation.</p><div class="feature-score"><div class="feature-score-number" id="simulated-score">742</div><p>Your simulated score changes based on the financial factors selected below.</p></div><div class="feature-controls">${[["Payment History", 80], ["Debt Utilisation (lower is better)", 30], ["Financial Stability", 84], ["Repayment Behaviour", 80], ["Credit History", 85]].map(([label, value]) => `<div class="feature-field"><label>${label}<span data-factor-value>${value}</span></label><input type="range" min="0" max="100" value="${value}" data-score-factor aria-label="${label}"></div>`).join("")}</div>`;
+        return;
+      }
+      if (name === "reputation-passport") {
+        content.innerHTML = `${featureHeading("Credit Reputation Passport", "Credigo · Digital Reputation")}<p class="subtle">Simulated information only. No blockchain verification or identity check has been performed.</p><div class="feature-card" style="max-width:600px;border-top:4px solid var(--orange)"><div class="eyebrow">Credigo Credit Reputation Passport</div><div class="feature-score"><div class="feature-score-number">742</div><div><strong>GOOD PROFILE</strong><p class="small subtle">Demo / Simulated</p></div></div><div class="feature-grid">${[["Payment Behaviour", "92%"], ["Financial Stability", "84%"], ["Repayment Consistency", "89%"], ["Credit History", "81%"]].map(([label, value]) => `<div class="feature-card"><span>${label}</span><strong>${value}</strong></div>`).join("")}</div><p class="small subtle" style="margin-top:16px">✓ Simulated profile &nbsp; ✓ Portable reputation concept</p><p class="small subtle">Updated: 28 Sep 2026</p><button class="feature-action" type="button" data-history-toggle>View Reputation History</button><div class="feature-breakdown" id="reputation-history"><p>Sep 2026 · Simulated profile updated</p><p>Jun 2026 · Repayment consistency improved</p><p>Mar 2026 · Demo profile created</p></div></div>`;
+        return;
+      }
+      if (name === "emi-calculator") {
+        content.innerHTML = `${featureHeading("EMI Calculator", "Financial Tools")}<p class="subtle">Illustrative calculation performed in this browser.</p><div class="feature-controls"><div class="feature-field"><label for="emi-amount">Loan Amount (₹)</label><input type="number" id="emi-amount" value="500000" min="1000"></div><div class="feature-field"><label for="emi-rate">Interest Rate (% yearly)</label><input type="number" id="emi-rate" value="10" min="0" max="50" step="0.1"></div><div class="feature-field"><label for="emi-tenure">Loan Tenure (years)</label><input type="number" id="emi-tenure" value="5" min="1" max="40"></div></div><div class="feature-grid"><div class="feature-card"><span>Monthly EMI</span><strong id="emi-monthly">₹10,624</strong></div><div class="feature-card"><span>Principal Amount</span><strong id="emi-principal">₹5,00,000</strong></div><div class="feature-card"><span>Total Interest</span><strong id="emi-interest">₹1,37,440</strong></div><div class="feature-card"><span>Total Repayment</span><strong id="emi-total">₹6,37,440</strong></div></div><div class="feature-card" style="margin-top:16px"><h3>Repayment Breakdown</h3><div class="feature-bar"><i id="emi-principal-bar" style="width:78%"></i></div><p class="small subtle" style="margin:8px 0 0">Principal <span id="emi-principal-share">78%</span> · Interest <span id="emi-interest-share">22%</span></p></div>`;
+        return;
+      }
+      if (name === "loan-readiness") {
+        content.innerHTML = `${featureHeading("Loan Readiness", "Borrower Tools")}<p class="subtle">Frontend simulation only. This is not a loan eligibility decision.</p><div class="feature-controls"><div class="feature-field"><label for="readiness-income">Monthly Income (₹)</label><input type="number" id="readiness-income" value="75000" min="0"></div><div class="feature-field"><label for="readiness-emi">Existing EMI (₹)</label><input type="number" id="readiness-emi" value="12000" min="0"></div><div class="feature-field"><label for="readiness-loan">Loan Amount (₹)</label><input type="number" id="readiness-loan" value="500000" min="0"></div><div class="feature-field"><label for="readiness-tenure">Loan Tenure (years)</label><input type="number" id="readiness-tenure" value="5" min="1" max="40"></div></div><div class="feature-score"><div class="feature-score-number" id="readiness-score">82%</div><div><strong>Loan Readiness</strong><p class="small subtle">Illustrative financial capacity indicator.</p></div></div><div class="feature-grid"><div class="feature-card"><span>Income Stability</span><strong>Strong</strong></div><div class="feature-card"><span>Existing Obligations</span><strong id="readiness-obligation">Healthy</strong></div><div class="feature-card"><span>Repayment Profile</span><strong>Strong</strong></div><div class="feature-card"><span>Credit Profile</span><strong>Good</strong></div></div>`;
+        return;
+      }
+      if (name === "financial-health") {
+        content.innerHTML = `${featureHeading("Financial Health", "Borrower Tools")}<p class="subtle">Illustrative / Simulated. Your inputs are not sent anywhere.</p><div class="feature-controls"><div class="feature-field"><label for="health-income">Monthly Income (₹)</label><input type="number" id="health-income" value="75000" min="0"></div><div class="feature-field"><label for="health-expenses">Monthly Expenses (₹)</label><input type="number" id="health-expenses" value="38000" min="0"></div><div class="feature-field"><label for="health-emi">Existing EMI (₹)</label><input type="number" id="health-emi" value="12000" min="0"></div></div><div class="feature-score"><div class="feature-score-number" id="health-score">₹25,000</div><div><strong>Available Monthly Capacity</strong><p class="small subtle" id="health-label">Illustrative monthly balance after expenses and EMI.</p></div></div><div class="feature-bar"><i id="health-bar" style="width:33%"></i></div>`;
+      }
+    }
+
+    function openFeature(name, view) {
+      const dialog = document.getElementById("feature-dialog");
+      if (name === "bank-dashboard") renderBankDashboard(view || "dashboard");
+      else renderFeature(name);
+      if (!dialog.open) dialog.showModal();
+      if (name === "emi-calculator") updateEmi();
+      if (name === "loan-readiness") updateReadiness();
+      if (name === "financial-health") updateFinancialHealth();
+      document.querySelector(".nav-inner")?.classList.remove("menu-open");
+      document.querySelectorAll("[data-nav-menu]").forEach(menu => {
+        menu.classList.remove("menu-open");
+        menu.querySelector(":scope > a").setAttribute("aria-expanded", "false");
+      });
+    }
+
+    function updateEmi() {
+      const amount = Math.max(0, Number(document.getElementById("emi-amount")?.value) || 0);
+      const rate = Math.max(0, Number(document.getElementById("emi-rate")?.value) || 0) / 1200;
+      const months = Math.max(1, Number(document.getElementById("emi-tenure")?.value) || 1) * 12;
+      const monthly = rate ? amount * rate * Math.pow(1 + rate, months) / (Math.pow(1 + rate, months) - 1) : amount / months;
+      const total = monthly * months;
+      const interest = Math.max(0, total - amount);
+      const format = value => `₹${Math.round(value).toLocaleString("en-IN")}`;
+      document.getElementById("emi-monthly").textContent = format(monthly);
+      document.getElementById("emi-principal").textContent = format(amount);
+      document.getElementById("emi-interest").textContent = format(interest);
+      document.getElementById("emi-total").textContent = format(total);
+      const principalShare = total ? amount / total * 100 : 0;
+      document.getElementById("emi-principal-share").textContent = `${Math.round(principalShare)}%`;
+      document.getElementById("emi-interest-share").textContent = `${Math.round(100 - principalShare)}%`;
+      document.getElementById("emi-principal-bar").style.width = `${principalShare}%`;
+    }
+
+    function updateReadiness() {
+      const income = Math.max(0, Number(document.getElementById("readiness-income").value) || 0);
+      const currentEmi = Math.max(0, Number(document.getElementById("readiness-emi").value) || 0);
+      const loan = Math.max(0, Number(document.getElementById("readiness-loan").value) || 0);
+      const years = Math.max(1, Number(document.getElementById("readiness-tenure").value) || 1);
+      const estimate = loan / (years * 12);
+      const ratio = income ? Math.min(1, (currentEmi + estimate) / income) : 1;
+      const score = Math.max(0, Math.min(100, Math.round(100 - ratio * 100)));
+      document.getElementById("readiness-score").textContent = `${score}%`;
+      document.getElementById("readiness-obligation").textContent = ratio < .35 ? "Healthy" : ratio < .5 ? "Moderate" : "High";
+    }
+
+    function updateFinancialHealth() {
+      const income = Math.max(0, Number(document.getElementById("health-income").value) || 0);
+      const expenses = Math.max(0, Number(document.getElementById("health-expenses").value) || 0);
+      const emi = Math.max(0, Number(document.getElementById("health-emi").value) || 0);
+      const capacity = income - expenses - emi;
+      const ratio = income ? Math.max(0, Math.min(1, capacity / income)) : 0;
+      document.getElementById("health-score").textContent = `₹${Math.round(capacity).toLocaleString("en-IN")}`;
+      document.getElementById("health-label").textContent = capacity > 0 ? "Positive illustrative monthly capacity." : "Expenses and EMI meet or exceed the entered income.";
+      document.getElementById("health-bar").style.width = `${ratio * 100}%`;
     }
 
     document.addEventListener("DOMContentLoaded", () => {
@@ -2479,13 +3033,97 @@
       if (hamburger && navInner) {
         hamburger.addEventListener("click", () => {
           navInner.classList.toggle("menu-open");
+          if (!navInner.classList.contains("menu-open")) {
+            document.querySelectorAll("[data-nav-menu]").forEach(menu => {
+              menu.classList.remove("menu-open");
+              menu.querySelector(":scope > a").setAttribute("aria-expanded", "false");
+            });
+          }
         });
       }
+
+      document.querySelectorAll("[data-nav-menu] > a").forEach(trigger => {
+        trigger.addEventListener("click", event => {
+          event.preventDefault();
+          const menu = trigger.parentElement;
+          const shouldOpen = !menu.classList.contains("menu-open");
+          document.querySelectorAll("[data-nav-menu]").forEach(item => {
+            item.classList.remove("menu-open");
+            item.querySelector(":scope > a").setAttribute("aria-expanded", "false");
+          });
+          menu.classList.toggle("menu-open", shouldOpen);
+          trigger.setAttribute("aria-expanded", String(shouldOpen));
+        });
+      });
+
+      document.addEventListener("click", event => {
+        if (event.target.closest("[data-nav-menu]")) return;
+        document.querySelectorAll("[data-nav-menu]").forEach(menu => {
+          menu.classList.remove("menu-open");
+          menu.querySelector(":focus")?.blur();
+          menu.querySelector(":scope > a").setAttribute("aria-expanded", "false");
+        });
+      });
+
+      document.addEventListener("keydown", event => {
+        if (event.key !== "Escape") return;
+        document.querySelectorAll("[data-nav-menu]").forEach(menu => {
+          menu.classList.remove("menu-open");
+          menu.querySelector(":focus")?.blur();
+          menu.querySelector(":scope > a").setAttribute("aria-expanded", "false");
+        });
+      });
+
+      const featureDialog = document.getElementById("feature-dialog");
+      document.body.addEventListener("click", event => {
+        const featureTrigger = event.target.closest("[data-feature]");
+        if (featureTrigger) {
+          event.preventDefault();
+          openFeature(featureTrigger.dataset.feature, featureTrigger.dataset.view);
+          return;
+        }
+        if (event.target.closest("[data-feature-close]")) featureDialog.close();
+        if (event.target === featureDialog) featureDialog.close();
+        const borrowerTrigger = event.target.closest("[data-borrower]");
+        if (borrowerTrigger) renderBorrowerDetail(Number(borrowerTrigger.dataset.borrower));
+        const dashboardTrigger = event.target.closest("[data-dashboard-view]");
+        if (dashboardTrigger) renderBankDashboard(dashboardTrigger.dataset.dashboardView);
+        const breakdownTrigger = event.target.closest("[data-breakdown-toggle]" ) || event.target.closest("[data-history-toggle]");
+        if (breakdownTrigger) {
+          const panel = document.getElementById("credit-breakdown") || document.getElementById("reputation-history");
+          panel.classList.toggle("open");
+          breakdownTrigger.textContent = panel.classList.contains("open") ? "Hide Details" : breakdownTrigger.hasAttribute("data-history-toggle") ? "View Reputation History" : "View Breakdown";
+        }
+      });
+
+      featureDialog.addEventListener("click", event => {
+        if (event.target === featureDialog) featureDialog.close();
+      });
+
+      document.getElementById("feature-content").addEventListener("input", event => {
+        if (event.target.matches("[data-score-factor]")) {
+          const factors = [...document.querySelectorAll("[data-score-factor]")];
+          let weighted = 0;
+          factors.forEach((factor, index) => {
+            factor.previousElementSibling.querySelector("[data-factor-value]").textContent = factor.value;
+            const factorValue = index === 1 ? 100 - Number(factor.value) : Number(factor.value);
+            weighted += factorValue * (index === 1 ? .15 : .2125);
+          });
+          const score = Math.round(300 + weighted * 5.5);
+          const scoreEl = document.getElementById("simulated-score");
+          scoreEl.textContent = String(Math.max(300, Math.min(850, score)));
+          scoreEl.animate([{ transform: "scale(1.04)" }, { transform: "scale(1)" }], { duration: 180 });
+        }
+        if (event.target.id?.startsWith("emi-")) updateEmi();
+        if (event.target.id?.startsWith("readiness-")) updateReadiness();
+        if (event.target.id?.startsWith("health-")) updateFinancialHealth();
+      });
 
       /* ---- Internal page navigation: intercept any link pointing at one
          of the site's known page files and swap the visible view instead
          of trying to load a page that doesn't exist in this single file. ---- */
       document.body.addEventListener("click", (e) => {
+        if (e.defaultPrevented) return;
         const link = e.target.closest("a[href]");
         if (!link) return;
         const href = link.getAttribute("href");
