@@ -23,6 +23,7 @@ Transparent Credigo logo variants are stored in `assets/logo/`: the dark wordmar
 - `/credit-cards/compare` and `/credit-cards/find` — comparison and preference questionnaire
 - `/personal-loans`, `/business-loans`, `/home-loans`, `/gold-loans` — lender discovery and calculators/estimates
 - `/emi` and `/iphone-on-emi` — illustrative purchase-financing estimates
+- `/platform` — Credigo's separate cooperative-banking credit infrastructure concept
 - `/eligibility`, `/apply`, `/application-status` — frontend-only enquiry flows
 - `/about` and `/faq` — Credigo context and product guidance
 
