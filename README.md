@@ -1,96 +1,33 @@
-# Credigo Website (Single-File Build)
+# Credigo
 
-The entire Credigo website — all 9 pages, all styling, all behavior — lives inside one file: **`index.html`**. Open it directly in any browser; nothing else needs to run or build.
+Credigo is a frontend-only financial-product discovery marketplace. It keeps the original project's cooperative-banking and inclusive-credit infrastructure story while adding a consumer journey to explore, compare, calculate, check indicative eligibility, and submit an application request.
 
-## How the internal navigation works
+## Run locally
 
-There are no separate `.html` files for each section. Instead, every page is a `<div class="page" id="page-...">` inside `index.html`, and JavaScript shows/hides the right one when you click a nav link — so it feels like real page navigation (URL updates with a `#hash`, back/forward buttons work, page title updates) without ever leaving `index.html`.
+For the full clean-path experience, serve this folder with any static HTTP server and open its local URL. For example, with Python installed:
 
-| Nav item | Internal view id |
-|---|---|
-| Home | `#home` |
-| Platform | `#platform` |
-| How It Works | `#how-it-works` |
-| Technology | `#technology` |
-| For Banks | `#banks` |
-| For Borrowers | `#borrowers` |
-| Impact | `#impact` |
-| About | `#about` |
-| Contact | `#contact` |
-
-All content, layout, and animations from the original multi-page build were preserved — this is purely a consolidation into one file, not a redesign.
-
-## Everything you need to change before launch
-
-### 1. Logo
-No separate logo file is wired in yet — the navbar and footer use an inline SVG mark as a clean placeholder. Search `index.html` for `<span class="mark">` (appears twice — navbar and footer) and replace it with:
-```html
-<img src="assets/logo/credigo-logo.png" alt="Credigo" style="height:32px;">
-```
-**File to add:** `assets/logo/credigo-logo.png`
-
-### 2. Images
-Three sections currently use placeholder stock photography (hotlinked so the site works immediately). Search `index.html` for `<!-- MANUAL CHANGE:` comments — each one marks exactly which image to replace and with what:
-
-| Add this file | Appears in view | Section |
-|---|---|---|
-| `assets/images/platform-preview.jpg` | Home (`#home`) | "What is Credigo?" |
-| `assets/images/platform-mockup.jpg` | Platform (`#platform`) | Platform introduction |
-| `assets/images/borrower-story.jpg` | For Borrowers (`#borrowers`) | Problem section |
-
-Recommended size: 900×700px, JPG.
-
-### 3. Google Forms
-**Location in `index.html`:** find `const FORM_LINKS = {` near the top of the `<script>` block at the bottom of the file:
-
-```javascript
-const FORM_LINKS = {
-  bankPilot:    "https://forms.gle/PASTE_BANK_PILOT_FORM_HERE",
-  borrower:     "https://forms.gle/PASTE_BORROWER_FORM_HERE",
-  partnership:  "https://forms.gle/PASTE_PARTNERSHIP_FORM_HERE",
-  investor:     "https://forms.gle/PASTE_INVESTOR_FORM_HERE",
-  contact:      "https://forms.gle/PASTE_CONTACT_FORM_HERE"
-};
+```powershell
+python -m http.server 8000
 ```
 
-Paste your real Google Form URLs here — this is the only place you need to edit. Every CTA button across every view (`data-form="..."` attributes) reads from this single object automatically.
+The site is a dependency-free HTML/CSS/JavaScript single-page application. It can also be opened directly as `index.html`; in that case, routes use `#/credit-cards` hash URLs so navigation does not try to open route names as files. `vercel.json` rewrites direct product URLs to `index.html`, so nested paths also load after refresh on Vercel.
 
-**Form mapping:**
+Transparent Credigo logo variants are stored in `assets/logo/`: the dark wordmark is used on the light header and the white wordmark is used in the dark footer.
 
-| Website location | Google Form |
-|---|---|
-| Navbar → Partner With Us (every view) | Bank Pilot |
-| Home → Partner With Us | Bank Pilot |
-| For Banks → Request a Pilot | Bank Pilot |
-| For Borrowers → Register Your Interest | Borrower |
-| Impact / About → Become a Partner | Partnership |
-| About → Investment Opportunity | Investor |
-| Contact → General Enquiry | Contact |
+## Main routes
 
-### 4. Contact information
-Search `index.html` for `<!-- MANUAL CHANGE: update contact details -->` — it appears in the footer and again in the Contact view (`#contact`). Current placeholder values (from the pitch deck): `globalexpressgroup@gmail.com`, `+91 96505 60277`, `+91 99101 96123`.
+- `/` — marketplace home
+- `/credit-cards` — card catalogue, bank directory, search and filters
+- `/credit-cards/:bank` — cards for a selected bank
+- `/credit-cards/:bank/:card` — card details
+- `/credit-cards/compare` and `/credit-cards/find` — comparison and preference questionnaire
+- `/personal-loans`, `/business-loans`, `/home-loans`, `/gold-loans` — lender discovery and calculators/estimates
+- `/emi` and `/iphone-on-emi` — illustrative purchase-financing estimates
+- `/eligibility`, `/apply`, `/application-status` — frontend-only enquiry flows
+- `/about` and `/faq` — Credigo context and product guidance
 
-### 5. Colors
-Inside the `<style>` block at the top of `index.html`, find `:root { ... }`:
-- `--blue` / `--blue-dark` — primary brand blue
-- `--orange` — accent color
-- `--ink` — heading/body text (near-black)
-- `--sky` / `--sky-2` — light blue section backgrounds
+## Demo data and privacy
 
-Change these once and the whole site updates.
+Product names are structured in the datasets near the top of the inline application script. Product fees, rates, benefits, eligibility and provider availability change; where values are not maintained and verified, the interface directs users to check current provider terms. Example provider listings do not imply a partnership.
 
-## Notes on content accuracy
-
-All statistics, features and claims come directly from the Credigo pitch deck. Forward-looking numbers (NPA reduction target, 2M+ borrowers, 50+ banks, seed funding ask) are explicitly labelled **Target** on the Impact and About views rather than presented as already-achieved results.
-
-## Structure
-
-```
-Credigo-Website/
-├── index.html      ← everything: markup, <style>, <script>
-├── assets/
-│   ├── images/      ← add your final images here
-│   ├── icons/
-│   └── logo/        ← add credigo-logo.png here
-└── README.md
-```
+Calculators are illustrative only. The eligibility flow is not a credit-bureau check and cannot approve an application. Application submissions and card comparison selections are stored in the browser's local storage; no backend request is made and no application data is transmitted to a lender.
