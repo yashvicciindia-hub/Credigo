@@ -150,6 +150,139 @@
     .detail-visual .card-artwork{min-height:230px}
     .detail-visual .card-artwork-image{width:min(100%,560px);height:100%;max-height:300px}
     @media(max-width:430px){.product-visual,.catalog-grid .product-visual{height:170px}}
+
+    /* ── CredigoAppDownloadCTA ─────────────────────────────────────────── */
+    .credigo-app-download{
+      position:fixed;
+      right:24px;
+      bottom:96px;  /* sits above the 60px chatbot launcher + 12px gap */
+      z-index:69;   /* below chatbot z-index:70 but above all page content */
+      display:flex;
+      align-items:center;
+      justify-content:flex-end;
+      pointer-events:none;
+    }
+    .credigo-app-download-link{
+      pointer-events:auto;
+      display:inline-flex;
+      align-items:center;
+      gap:0;
+      height:46px;
+      max-width:46px;
+      padding:0 12px;
+      overflow:hidden;
+      border-radius:23px;
+      background:var(--ink);
+      color:var(--green);
+      text-decoration:none;
+      box-shadow:0 6px 22px #15212830;
+      cursor:pointer;
+      transition:
+        max-width .35s cubic-bezier(.2,.7,.2,1),
+        padding .35s cubic-bezier(.2,.7,.2,1),
+        box-shadow .25s ease,
+        transform .2s cubic-bezier(.2,.7,.2,1);
+      will-change:max-width,padding;
+      white-space:nowrap;
+    }
+    .credigo-app-download-link:hover,
+    .credigo-app-download-link:focus-visible{
+      max-width:228px;
+      padding:0 16px 0 12px;
+      box-shadow:0 12px 32px #15212848;
+      transform:translateY(-2px);
+      outline:none;
+    }
+    .credigo-app-download-link:focus-visible{
+      outline:3px solid #70bb51;
+      outline-offset:3px;
+    }
+    .credigo-app-download-icon{
+      flex:none;
+      display:grid;
+      place-items:center;
+      width:22px;
+      height:22px;
+      color:var(--green);
+      transition:transform .25s cubic-bezier(.2,.7,.2,1);
+    }
+    .credigo-app-download-link:hover .credigo-app-download-icon,
+    .credigo-app-download-link:focus-visible .credigo-app-download-icon{
+      transform:translateY(-1px) scale(1.08);
+    }
+    .credigo-app-download-icon svg{
+      width:20px;
+      height:20px;
+      display:block;
+    }
+    .credigo-app-download-label{
+      flex:none;
+      overflow:hidden;
+      max-width:0;
+      opacity:0;
+      font-family:"DM Sans",sans-serif;
+      font-size:.82rem;
+      font-weight:700;
+      color:white;
+      letter-spacing:.01em;
+      margin-left:0;
+      transition:
+        max-width .35s cubic-bezier(.2,.7,.2,1),
+        opacity .25s ease,
+        margin-left .35s cubic-bezier(.2,.7,.2,1);
+    }
+    .credigo-app-download-link:hover .credigo-app-download-label,
+    .credigo-app-download-link:focus-visible .credigo-app-download-label{
+      max-width:160px;
+      opacity:1;
+      margin-left:9px;
+    }
+    /* entrance animation */
+    @keyframes cad-enter{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:translateX(0)}}
+    .credigo-app-download{
+      animation:cad-enter .5s .8s cubic-bezier(.2,.8,.2,1) both;
+    }
+    /* tablet */
+    @media(max-width:1024px){
+      .credigo-app-download{right:18px;bottom:90px}
+    }
+    /* mobile */
+    @media(max-width:600px){
+      .credigo-app-download{
+        right:14px;
+        bottom:max(82px,calc(68px + max(14px,env(safe-area-inset-bottom))));
+      }
+      .credigo-app-download-link{
+        height:44px;
+        max-width:44px;
+        padding:0 11px;
+        border-radius:22px;
+      }
+      /* on mobile, always show a tiny pill with icon – no hover expansion */
+      .credigo-app-download-link:hover,
+      .credigo-app-download-link:focus-visible{
+        max-width:200px;
+        padding:0 14px 0 11px;
+      }
+    }
+    /* touch / coarse pointer: show label on tap/focus only */
+    @media(hover:none),(pointer:coarse){
+      .credigo-app-download-link{
+        max-width:44px;
+        padding:0 11px;
+      }
+      .credigo-app-download-link:focus-visible{
+        max-width:200px;
+        padding:0 14px 0 11px;
+      }
+    }
+    @media(prefers-reduced-motion:reduce){
+      .credigo-app-download{animation:none}
+      .credigo-app-download-link,
+      .credigo-app-download-icon,
+      .credigo-app-download-label{transition:none}
+    }
+    /* ── /CredigoAppDownloadCTA ────────────────────────────────────────── */
   </style>
 </head>
 <body>
@@ -200,6 +333,34 @@
     <button class="chat-launcher" id="chat-launcher" type="button" aria-label="Open Credigo Assistant" aria-controls="chat-window" aria-expanded="false">
       <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 5.75A2.75 2.75 0 0 1 6.75 3h10.5A2.75 2.75 0 0 1 20 5.75v7.5A2.75 2.75 0 0 1 17.25 16H10l-4.5 4v-4.1A2.75 2.75 0 0 1 4 13.25v-7.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8 8h8M8 11.5h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
     </button>
+    <!-- CredigoAppDownloadCTA: mounted once in the global layout, above the chatbot -->
+    <div class="credigo-app-download" id="credigo-app-download" role="complementary" aria-label="Download Credigo App">
+      <a
+        class="credigo-app-download-link"
+        href="/Credigo.apk"
+        download="Credigo.apk"
+        aria-label="Download Credigo Android App"
+        title="Download Credigo Android App"
+      >
+        <span class="credigo-app-download-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Android robot head outline -->
+            <path d="M7 10.5C7 8.015 9.239 6 12 6s5 2.015 5 4.5V17a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2v-6.5Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+            <!-- antenna left -->
+            <line x1="9.5" y1="6" x2="7.5" y2="3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <!-- antenna right -->
+            <line x1="14.5" y1="6" x2="16.5" y2="3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <!-- eyes -->
+            <circle cx="10" cy="10" r="1" fill="currentColor"/>
+            <circle cx="14" cy="10" r="1" fill="currentColor"/>
+            <!-- download arrow inside body -->
+            <path d="M12 13v3.5M10.5 15l1.5 1.5 1.5-1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="credigo-app-download-label">Download Credigo App</span>
+      </a>
+    </div>
+    <!-- /CredigoAppDownloadCTA -->
   </aside>
   <script>
   (() => {
